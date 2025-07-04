@@ -7,8 +7,6 @@ from config import BOT_TOKEN
 async def start(update: Update, context: CallbackContext):
     await update.message.reply_text("🎬 Welcome to Playnema!\n\nSend the name of a movie or series:")
 
-نام فیلم یا سریال رو بفرست:")
-
 async def handle_text(update: Update, context: CallbackContext):
     query = update.message.text
     results = search_movies(query)

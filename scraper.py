@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 def search_movies(query):
-    url = f"https://digimoviez.pics/?s={query.replace(' ', '+')}"
+    url = f"https://digimoviez.com/?s={query.replace(' ', '+')}"
     resp = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
     soup = BeautifulSoup(resp.text, 'html.parser')
     items = soup.select("div.result-item")

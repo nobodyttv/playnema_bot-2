@@ -6,10 +6,9 @@ def search_movies(query):
     headers = {"User-Agent": "Mozilla/5.0"}
     resp = requests.get(url, headers=headers)
     soup = BeautifulSoup(resp.text, 'html.parser')
-    
-    posts = soup.select("div.result-item")  # اگر نتیجه نداد، باید div.grid-item یا article.post چک کنیم
-    if not posts:
-        posts = soup.select("article")  # ساختار جدید سایت احتمالاً اینطوره
+
+    # بر اساس ساختار جدید سایت
+    posts = soup.select("div.grid-item")
 
     results = []
     for post in posts:
@@ -27,8 +26,8 @@ def search_movies(query):
             "title": title.strip(),
             "link": link,
             "poster": poster,
-            "download_link": link,  # موقتاً لینک خود پست
-            "stream_link": link     # چون فعلاً استخراج دقیق لینک دانلود نداریم
+            "download_link": link,
+            "stream_link": link
         })
 
     return results

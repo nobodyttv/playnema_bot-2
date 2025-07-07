@@ -32,3 +32,12 @@ def search_movies(query):
         })
 
     return results
+def get_download_links(page_url):
+    try:
+        r = requests.get(page_url, headers={"User-Agent": "Mozilla/5.0"})
+        soup = BeautifulSoup(r.text, "html.parser")
+        download_button = soup.find("a", href=True, text=lambda x: x and ("دانلود" in x or "Download" in x))
+        stream_button = soup.find("a", href=True, text=lambda x: x and ("تماشا" in x or "Watch" in x))
+        return download_button["href"] if download_button else page_url, stream_button["href"] if stream_button else page_url
+    except:
+        return page_url, page_url
